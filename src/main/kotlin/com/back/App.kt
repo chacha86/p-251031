@@ -47,7 +47,11 @@ class App {
                         continue
                     }
 
-                    println("${id}")
+                    wiseSayings.removeIf {
+                        it.id == id
+                    }
+
+                    println("${id}번 명언이 삭제되었습니다.")
                 }
             }
         }
