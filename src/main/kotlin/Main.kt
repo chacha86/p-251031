@@ -10,8 +10,18 @@ fun main() {
         print("명언) ")
         val input = readln().trim()
 
-        if(input == "종료") {
-            break
+        when (input) {
+            "종료" -> {
+                break
+            }
+
+            "등록" -> {
+                print("명언: ")
+                val content = readln().trim()
+
+                print("작가: ")
+                val author = readln().trim()
+            }
         }
     }
 
