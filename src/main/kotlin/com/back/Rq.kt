@@ -1,7 +1,7 @@
 package com.back
 
 class Rq(
-    val cmd: String
+    cmd: String
 ) {
 
     val action: String
@@ -26,8 +26,14 @@ class Rq(
         }
     }
 
-    fun getParamValue(key: String): String {
-        return paramMap[key]!!
+    private fun getParamValue(key: String): String? {
+        return paramMap[key]
+    }
+
+    fun getParamValueAsInt(key: String, defaultValue: Int): Int {
+        return getParamValue(key)
+            ?.toIntOrNull()
+            ?: defaultValue
     }
 
 }
