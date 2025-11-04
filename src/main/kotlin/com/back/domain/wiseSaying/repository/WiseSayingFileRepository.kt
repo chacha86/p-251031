@@ -1,10 +1,41 @@
 package com.back.domain.wiseSaying.repository
 
 import com.back.domain.wiseSaying.entity.WiseSaying
+import com.back.global.appConfig.AppConfig
+import java.nio.file.Path
 
 class WiseSayingFileRepository : WiseSayingRepository {
+
+    var lastId = 0
+
+    val tableDirPath: Path
+        get() {
+            return AppConfig.dbDirPath.resolve("wiseSaying")
+        }
+
+
     override fun save(wiseSaying: WiseSaying): WiseSaying {
-        TODO("Not yet implemented")
+        return wiseSaying
+            .takeIf { it.isNew() }
+            .also {
+                wiseSaying.id = ++lastId
+                saveOnDisk(wiseSaying)
+            } ?: wiseSaying
+    }
+
+    private fun saveOnDisk(wiseSaying: WiseSaying) {
+        mkTableDirsIfNotExists()
+
+        val wiseSayingFile = tableDirPath.resolve("${wiseSaying.id}.json")
+        wiseSayingFile.toFile().writeText(wiseSaying.jsonStr)
+    }
+
+    private fun mkTableDirsIfNotExists() {
+        tableDirPath.toFile().run {
+            if (!exists()) {
+                mkdirs()
+            }
+        }
     }
 
     override fun findAll(): List<WiseSaying> {

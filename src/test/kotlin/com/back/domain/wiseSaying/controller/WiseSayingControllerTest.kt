@@ -14,8 +14,6 @@ class WiseSayingControllerTest {
         SingletonScope.wiseSayingMemRepository.clear()
     }
 
-
-
     @Test
     fun `명언 작성`() {
         val result = TestRunner.run(
