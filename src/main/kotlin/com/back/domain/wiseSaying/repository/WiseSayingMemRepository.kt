@@ -1,6 +1,7 @@
 package com.back.domain.wiseSaying.repository
 
 import com.back.domain.wiseSaying.entity.WiseSaying
+import com.back.standard.dto.Page
 
 class WiseSayingMemRepository : WiseSayingRepository {
 
@@ -40,6 +41,19 @@ class WiseSayingMemRepository : WiseSayingRepository {
 
     override fun findByAuthorContent(keyword: String): List<WiseSaying> {
         return listOf()
+    }
+
+    override fun findByKeywordPaged(
+        keywordType: String,
+        keyword: String,
+        itemsPerPage: Int,
+        pageNo: Int
+    ): Page<WiseSaying> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findAllPaged(itemsPerPage: Int, pageNo: Int): Page<WiseSaying> {
+        TODO("Not yet implemented")
     }
 
 }

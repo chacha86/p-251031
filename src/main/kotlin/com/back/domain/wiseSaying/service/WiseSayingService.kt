@@ -3,6 +3,7 @@ package com.back.domain.wiseSaying.service
 import com.back.domain.wiseSaying.entity.WiseSaying
 import com.back.domain.wiseSaying.repository.WiseSayingRepository
 import com.back.global.bean.SingletonScope
+import com.back.standard.dto.Page
 
 class WiseSayingService(
     val wiseSayingRepository: WiseSayingRepository = SingletonScope.wiseSayingFileRepository
@@ -33,5 +34,13 @@ class WiseSayingService(
             "author" -> wiseSayingRepository.findByAuthorLike("%$keyword%")
             else -> wiseSayingRepository.findByAuthorContent("%$keyword%")
         }
+    }
+
+    fun findByKeywordPaged(keywordType: String, keyword: String, itemsPerPage: Int, pageNo: Int): Page<WiseSaying> {
+        return wiseSayingRepository.findByKeywordPaged(keywordType, keyword, itemsPerPage, pageNo)
+    }
+
+    fun findAllPaged(itemsPerPage: Int, pageNo: Int): Page<WiseSaying> {
+        return wiseSayingRepository.findAllPaged(itemsPerPage, pageNo)
     }
 }
