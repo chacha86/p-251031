@@ -59,8 +59,12 @@ class WiseSayingFileRepository : WiseSayingRepository {
         }
     }
 
-    override fun delete(wiseSaying: WiseSaying): Boolean {
-        TODO("Not yet implemented")
+    override fun delete(wiseSaying: WiseSaying) {
+        tableDirPath
+            .resolve("${wiseSaying.id}.json")
+            .toFile()
+            .takeIf { it.exists() }
+            ?.delete()
     }
 
     override fun findAll(): List<WiseSaying> {

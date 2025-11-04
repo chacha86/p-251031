@@ -21,7 +21,9 @@ class WiseSayingMemRepository : WiseSayingRepository {
 
     override fun findById(id: Int): WiseSaying? = wiseSayings.firstOrNull { it.id == id }
 
-    override fun delete(wiseSaying: WiseSaying) = wiseSayings.remove(wiseSaying)
+    override fun delete(wiseSaying: WiseSaying) {
+        wiseSayings.remove(wiseSaying)
+    }
 
     override fun clear() {
         lastId = 0
