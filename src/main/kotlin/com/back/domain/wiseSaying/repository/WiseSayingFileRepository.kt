@@ -71,6 +71,7 @@ class WiseSayingFileRepository : WiseSayingRepository {
     override fun findAll(): List<WiseSaying> {
         return tableDirPath.toFile()
             .listFiles()
+            ?.filter { it.name != "data.json" }
             ?.filter { it.name.endsWith(".json") }
             ?.map { it.readText() }
             ?.map(WiseSaying.Companion::fromJsonStr)
@@ -102,6 +103,36 @@ class WiseSayingFileRepository : WiseSayingRepository {
                     .toFile()
                     .writeText(it)
             }
+    }
+
+    private fun filterByKeyword(
+        keyword: String,
+        selector: (WiseSaying) -> String
+    ): List<WiseSaying> {
+
+        val pure = keyword.replace("%", "")
+        val wiseSayings = findAll()
+
+        if (pure.isBlank()) return wiseSayings
+
+        return when {
+            keyword.startsWith("%") && keyword.endsWith("%") ->
+                wiseSayings.filter { selector(it).contains(pure) }
+            keyword.startsWith("%") ->
+                wiseSayings.filter { selector(it).endsWith(pure) }
+            keyword.endsWith("%") ->
+                wiseSayings.filter { selector(it).startsWith(pure) }
+            else ->
+                wiseSayings.filter { selector(it) == pure }
+        }
+    }
+
+    override fun findByAuthorLike(authorLike: String): List<WiseSaying> {
+        return filterByKeyword(authorLike) { it.author }
+    }
+
+    override fun findByAuthorContent(contentLike: String): List<WiseSaying> {
+        return filterByKeyword(contentLike) { it.content }
     }
 
 }

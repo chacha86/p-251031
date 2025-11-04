@@ -34,4 +34,12 @@ class WiseSayingMemRepository : WiseSayingRepository {
         println("WiseSayingMemRepository builded")
     }
 
+    override fun findByAuthorLike(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
+    override fun findByAuthorContent(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
 }
