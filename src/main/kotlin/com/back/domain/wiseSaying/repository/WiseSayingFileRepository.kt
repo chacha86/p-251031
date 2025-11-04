@@ -68,7 +68,12 @@ class WiseSayingFileRepository : WiseSayingRepository {
     }
 
     override fun findAll(): List<WiseSaying> {
-        TODO("Not yet implemented")
+        return tableDirPath.toFile()
+            .listFiles()
+            ?.filter { it.name.endsWith(".json") }
+            ?.map { it.readText() }
+            ?.map(WiseSaying.Companion::fromJsonStr)
+            .orEmpty()
     }
 
     override fun findById(id: Int): WiseSaying? {
