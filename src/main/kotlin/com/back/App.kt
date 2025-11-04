@@ -2,6 +2,7 @@ package com.back
 
 import com.back.domain.system.controller.SystemController
 import com.back.domain.wiseSaying.controller.WiseSayingController
+import com.back.global.rq.Rq
 
 class App(
     val wiseSayingController: WiseSayingController = WiseSayingController(),

@@ -1,4 +1,4 @@
-package com.back
+package com.back.global.rq
 
 class Rq(
     cmd: String

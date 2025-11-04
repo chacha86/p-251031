@@ -1,10 +1,11 @@
-package com.back
+package com.back.domain.wiseSaying.controller
 
+import com.back.TestRunner
 import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
 import kotlin.test.assertContains
 
-class AppTest {
+class WiseSayingControllerTest {
 
     @Test
     fun `명언 작성`() {
