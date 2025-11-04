@@ -1,10 +1,14 @@
 package com.back.domain.wiseSaying.entity
 
+import com.back.standard.ut.JsonUtil
+
 data class WiseSaying(
     var id: Int = 0,
     var content: String,
     var author: String
 ) {
+
+    constructor(content: String, author: String) : this(0, content, author)
 
     fun modify(content: String, author: String) {
         this.content = content
@@ -25,4 +29,16 @@ data class WiseSaying(
                 }
             """.trimIndent()
         }
+
+    companion object {
+        fun fromJsonStr(jsonStr: String): WiseSaying {
+            val map = JsonUtil.jsonStrToMap(jsonStr)
+
+            return WiseSaying(
+                id = map["id"] as Int,
+                content = map["content"] as String,
+                author = map["author"] as String,
+            )
+        }
+    }
 }
