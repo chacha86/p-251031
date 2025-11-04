@@ -5,6 +5,7 @@ import com.back.global.appConfig.AppConfig
 import com.back.global.bean.SingletonScope
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 
 class WiseSayingFileRepositoryTest {
@@ -20,10 +21,10 @@ class WiseSayingFileRepositoryTest {
         }
     }
 
-//    @BeforeEach
-//    fun setUp() {
-//        wiseSayingRepository.clear()
-//    }
+    @BeforeEach
+    fun setUp() {
+        wiseSayingRepository.clear()
+    }
 
     @Test
     fun `save`() {
