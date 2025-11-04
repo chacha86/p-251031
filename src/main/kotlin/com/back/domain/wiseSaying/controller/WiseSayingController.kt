@@ -73,4 +73,9 @@ class WiseSayingController(
         wiseSayingService.modify(wiseSaying, newContent, newAuthor)
         println("${id}번 명언이 수정되었습니다.")
     }
+
+    fun build() {
+        wiseSayingService.build()
+        println("data.json 파일의 내용이 갱신되었습니다.")
+    }
 }

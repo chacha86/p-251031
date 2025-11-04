@@ -30,4 +30,8 @@ class WiseSayingMemRepository : WiseSayingRepository {
         wiseSayings.clear()
     }
 
+    override fun build() {
+        println("WiseSayingMemRepository builded")
+    }
+
 }

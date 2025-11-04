@@ -78,4 +78,5 @@ class WiseSayingFileRepositoryTest {
         wiseSayingRepository.saveLastId(10)
         assertThat(wiseSayingRepository.loadLastId()).isEqualTo(10)
     }
+
 }

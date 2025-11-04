@@ -2,6 +2,7 @@ package com.back.domain.wiseSaying.repository
 
 import com.back.domain.wiseSaying.entity.WiseSaying
 import com.back.global.appConfig.AppConfig
+import com.back.standard.ut.JsonUtil
 import java.nio.file.Path
 
 class WiseSayingFileRepository : WiseSayingRepository {
@@ -87,4 +88,20 @@ class WiseSayingFileRepository : WiseSayingRepository {
     override fun clear() {
         tableDirPath.toFile().deleteRecursively()
     }
+
+    override fun build() {
+        mkTableDirsIfNotExists()
+
+        val mapList = findAll()
+            .map(WiseSaying::map)
+
+        JsonUtil.toString(mapList)
+            .let {
+                tableDirPath
+                    .resolve("data.json")
+                    .toFile()
+                    .writeText(it)
+            }
+    }
+
 }
